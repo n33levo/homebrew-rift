@@ -1,15 +1,18 @@
 class Rift < Formula
   desc "P2P localhost tunneling — your teammate's ports on your machine"
   homepage "https://github.com/n33levo/rift"
-  url "https://github.com/n33levo/rift/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "2b4375a0e8318cf2905911cbd0dac1ac101d75cad2e8e33159fdd2ffb907241c"
+  version "0.1.0"
   license "MIT"
-  head "https://github.com/n33levo/rift.git", branch: "master"
 
-  depends_on "rust" => :build
+  on_macos do
+    on_arm do
+      url "https://github.com/n33levo/rift/releases/download/v0.1.0/rift-0.1.0-aarch64-apple-darwin.tar.gz"
+      sha256 "324a776d488bf6ca4ddbb91119c7d83a306ca8d011028a6927f80b94f8f3599d"
+    end
+  end
 
   def install
-    system "cargo", "install", "--locked", "--root", prefix, "--path", "crates/wh-cli"
+    bin.install "rift"
   end
 
   test do
